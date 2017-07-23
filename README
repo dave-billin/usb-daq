@@ -1,0 +1,11 @@
+# USB Data Acquisition Module Firmware
+
+## Description
+This repository contains the source code for a USB data acquisition module used in the University of Idaho Autonomous Underwater Vehicle (AUV).  The hardware target is the ATMEL ATSAMD11D14A ARM microcontroller MattairTech MT-D11 development board.
+
+## Dependencies
+Sources in this repository depend on modules provided in the [ATMEL Software Framework (ASF) library](http://asf.atmel.com/docs/latest/download.html).
+
+## Building for the GNU C compiler (gcc)
+*TODO: provide build instructions*
+
