@@ -45,6 +45,10 @@
 #
 # \asf_license_stop
 #
+# Set the path where the ATMEL Software Framework (ASF) source tree is located.  If the environment
+# variable ASF_PATH is set, it will be used instead
+ASF_PATH ?= $(realpath ../xdk-asf)
+
 # Verify that the path where the ATMEL Software Framework (ASF) source tree is located has been set
 # in the top-level makefile
 ifndef ASF_PATH
@@ -55,3 +59,4 @@ endif
 # config.mk file.
 MAKEFILE_PATH = $(ASF_PATH)/sam0/utils/make/Makefile.sam.in
 include $(MAKEFILE_PATH)
+

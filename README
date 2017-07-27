@@ -7,5 +7,11 @@ This repository contains the source code for a USB data acquisition module used 
 Sources in this repository depend on modules provided in the [ATMEL Software Framework (ASF) library](http://asf.atmel.com/docs/latest/download.html).
 
 ## Building for the GNU C compiler (gcc)
-*TODO: provide build instructions*
+To build the data acquisition module (DAQ) firmware image, simply navigate to the base directory of the repository (the directory containing this README file) and run ``make``.
+
+Note that in order to build the firmware, it is necessary to build and link against modules supplied in the ATMEL ASF source tree.  By default, the ASF source tree is assumed to exist in the subdirectory called 'xdk-asf' that exists in the parent directory of the DAQ firmware (i.e. ../xdk-asf).  To build against ASF sources in a different location, the environment variable ASF_PATH may be set to the base directory of the ASF sources, e.g.:
+```
+export ASF_PATH=/home/somebody/xdk-asf-3.34.2
+make
+```
 

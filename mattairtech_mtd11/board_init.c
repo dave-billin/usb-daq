@@ -9,7 +9,7 @@
 #include <board.h>
 #include <conf_board.h>
 #include <port.h>
-
+#include "mattairtech_mtd11.h"
 
 // The 'board.h' file declares a common function, 'board_init'.  Here, we make
 // board_init an alias for the local function, system_board_init.

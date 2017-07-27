@@ -1,7 +1,7 @@
 /**
  * \file
  *
- * \brief SAM D21 Xplained Pro board configuration.
+ * \brief User Interface
  *
  * Copyright (c) 2014-2015 Atmel Corporation. All rights reserved.
  *
@@ -44,10 +44,64 @@
  * Support and FAQ: visit <a href="http://www.atmel.com/design-support/">Atmel Support</a>
  */
 
-#ifndef CONF_BOARD_H_INCLUDED
-#define CONF_BOARD_H_INCLUDED
+#include <asf.h>
+#include "ui.h"
+#include "mattairtech_mtd11.h"
 
-/* Enable USB VBUS detect */
-#define CONF_BOARD_USB_VBUS_DETECT
+static volatile bool ui_b_loopback = true;
 
-#endif /* CONF_BOARD_H_INCLUDED */
+void ui_init(void)
+{
+   // Initialize LEDs
+   LED_On(LED_0_PIN);
+}
+
+void ui_powerdown(void)
+{
+   LED_Off(LED_0_PIN);
+}
+
+void ui_ledOn(void)
+{
+   LED_On(LED_0_PIN);
+}
+
+void ui_ledOff(void)
+{
+   LED_Off(LED_0_PIN);
+}
+
+void ui_wakeup(void)
+{
+   LED_On(LED_0_PIN);
+}
+
+void ui_loop_back_state(bool b_started)
+{
+   ui_b_loopback = b_started;
+}
+
+void ui_process(uint16_t framenumber)
+{
+   if (ui_b_loopback) {
+      LED_On(LED_0_PIN);
+      return;
+   }
+
+   if ((framenumber % 1000) == 0) {
+      LED_On(LED_0_PIN);
+   }
+   if ((framenumber % 1000) == 500) {
+      LED_Off(LED_0_PIN);
+   }
+}
+
+/**
+ * \defgroup UI User Interface
+ *
+ * Human interface on SAMD21-XPlain:
+ * - LED0 blinks when USB host has checked and enabled Vendor interface
+ * - LED0 is on when
+ *   - USB is in IDLE mode and Vendor interface is not enabled by Host
+ *   - loopback is running
+ */

@@ -13,6 +13,7 @@
 #ifdef USE_MOCK_ADC_DRIVER
 
 #include <tcc.h>
+#include <tcc_callback.h>
 
 /// Data structure used to access TCC0
 struct tcc_module g_tcc_instance;
@@ -50,8 +51,8 @@ static void configureTcc0( uint8_t channelEnableMask )
    config_tcc.counter.clock_source = GCLK_GENERATOR_1;
    config_tcc.counter.clock_prescaler = TCC_CLOCK_PRESCALER_DIV64;
    config_tcc.counter.period = 2000;
-   tcc_init(&tcc_instance, TCC0, &config_tcc);
-   tcc_enable(&tcc_instance);
+   tcc_init(&g_tcc_instance, TCC0, &config_tcc);
+   tcc_enable(&g_tcc_instance);
 }
 
 
@@ -59,9 +60,9 @@ static void configureTcc0( uint8_t channelEnableMask )
 /// Configures callbacks for TCC0 events
 static void configureTcc0Callbacks( void )
 {
-   tcc_register_callback(&tcc_instance, tcc0OverflowCallback,
+   tcc_register_callback(&g_tcc_instance, tcc0OverflowCallback,
                          TCC_CALLBACK_OVERFLOW);
-   tcc_enable_callback(&tcc_instance, TCC_CALLBACK_OVERFLOW);
+   tcc_enable_callback(&g_tcc_instance, TCC_CALLBACK_OVERFLOW);
 }
 
 #endif // END #ifdef USE_MOCK_ADC_DRIVER
@@ -75,7 +76,7 @@ void adc_initialize( void )
 #ifndef USE_MOCK_ADC_DRIVER
    // TODO: add the real ADC initialization
 #else
-   configureTcc0();
+   configureTcc0(0x3f);
    configureTcc0Callbacks();
 #endif
 }
