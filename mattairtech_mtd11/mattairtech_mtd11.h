@@ -42,7 +42,6 @@ extern "C" {
  * @{
  */
 
-void system_board_init(void);
 
 /**
  * \defgroup mattairtech_mtd11_features_group Features
@@ -52,9 +51,10 @@ void system_board_init(void);
  * @{
  */
 
-/** Name string macro */
-#define BOARD_NAME                "MATTAIRTECH_MTD11"
-
+#ifndef BOARD_NAME
+   /** Name string macro */
+   #define BOARD_NAME                "MATTAIRTECH_MTD11"
+#endif
 /** \name Resonator definitions
  *  @{ */
 #define BOARD_FREQ_SLCK_XTAL      (32768U)

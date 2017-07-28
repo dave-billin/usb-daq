@@ -39,7 +39,7 @@
 # Verify that the path where the ATMEL Software Framework (ASF) source tree is located has been set
 # in the top-level makefile
 ifndef ASF_PATH
-$(error ASF_PATH has not been set)
+$(error ASF_PATH has not been defined in the environment.  Set it to the path of the root directory ASF of the ASF tree)
 endif
 
 # Path to top level ASF directory relative to this project directory.
@@ -128,7 +128,7 @@ INC_PATH = \
 
 # Additional search paths for libraries.
 LIB_PATH =  \
-       thirdparty/CMSIS/Lib/GCC
+       $(ASF_PATH)/thirdparty/CMSIS/Lib/GCC
 
 # List of libraries to use during linking.
 LIBS =  \
